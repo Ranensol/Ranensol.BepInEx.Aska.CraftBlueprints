@@ -123,11 +123,11 @@ Create or edit `CustomRecipes.json`:
 | `ingredients` | ✅ Yes | Items and quantities needed to craft this item, use values from `Items.txt` |
 | `quantity` | ✅ Yes | How many items this recipe produces |
 | `menuLists` | ✅ Yes | Which crafting menus show this recipe (from `MenuLists.txt`) |
-| `rules` | No | Unlock conditions, e.g. Workshop Tier 2 (from `Rules.txt`) |
+| `rules` | ❌ No | Unlock conditions, e.g. Workshop Tier 2 (from `Rules.txt`) |
 | `interaction` | ✅ Yes | Which crafting station this item can be created in (from `Stations.txt`) |
 | `category` | ✅ Yes | Blueprint category (from `Categories.txt`) |
-| `description` | No | Short description shown in-game |
-| `lore` | No | Flavor text shown in-game |
+| `description` | ❌ No | Short description shown in-game |
+| `lore` | ❌ No | Flavor text shown in-game |
 
 ### Important Notes
 
