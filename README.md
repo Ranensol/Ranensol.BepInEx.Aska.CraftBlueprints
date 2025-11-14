@@ -4,7 +4,7 @@
 
 # Aska - Ranensol's Craft Blueprints
 
-![License](https://img.shields.io/github/license/Ranensol/Ranensol.BepInEx.Aska.CraftBlueprints)
+![License](https://img.shields.io/github/license/Ranensol/Ranensol.BepInEx.Aska.CraftBlueprints?style=flat-square)
 ![GitHub release](https://img.shields.io/github/v/release/Ranensol/Ranensol.BepInEx.Aska.CraftBlueprints)
 
 A BepInEx mod for ASKA that allows you to create custom crafting recipes using simple JSON files.
