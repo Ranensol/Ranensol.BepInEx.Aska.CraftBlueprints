@@ -15,6 +15,8 @@ A BepInEx mod for ASKA that allows you to create custom crafting recipes using s
 - 🔧 Simple JSON configuration
 - 📋 Automatic reference file generation for relevant in-game items
 - 🎮 Works with most crafting stations (Workshop, Weaver, Player Inventory, etc.)
+- ⚠️ Does NOT currently work with "forging" crafting stations (Carpenter, Blacksmith) - there are multiple additional code layers simply beyond this mod (for now)
+- ⚠️ Does NOT currently provide Cooking station recipes - these are an entirely different beast, but may be covered in a future separate mod
 - 🔄 Hot-reload support - just edit JSON and restart the game
 
 ## Installation
