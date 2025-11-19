@@ -23,21 +23,21 @@ A BepInEx mod for ASKA that allows you to create custom crafting recipes using s
 
 ### IMPORTANT
 
-1. **Always backup your local save game and (if applicable) your server save game before you do anything with any mod** 
+**Always backup your local save game and (if applicable) your server save game before you do anything with any mod** 
 
 
 ### Prerequisites
 
-1. **Install BepInEx 6 (IL2CPP)** if you haven't already:
+**Install BepInEx 6 (IL2CPP)** if you haven't already:
    - Download the latest **IL2CPP** build from [BepInEx builds](https://builds.bepinex.dev/projects/bepinex_be)
    - Extract the contents to your ASKA game folder (where `ASKA.exe` is located)
    - Launch the game once to initialize BepInEx, then close it
 
 ### Installing the Mod
 
-2. **Download this mod** from the [Releases](../../releases) page
-3. **Extract** the mod files to `BepInEx/plugins/` folder
-4. **Launch the game** - config and recipe files will be generated automatically
+1. **Download this mod** from the [Releases](../../releases) page
+2. **Extract** the mod files to `BepInEx/plugins/` folder
+3. **Launch the game** - config and recipe files will be generated automatically
 
 Your folder structure should look like:
 ```
