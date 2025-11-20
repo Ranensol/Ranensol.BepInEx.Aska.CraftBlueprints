@@ -1,5 +1,4 @@
 ﻿using BepInEx;
-using BepInEx.Configuration;
 using BepInEx.Logging;
 using BepInEx.Unity.IL2CPP;
 using HarmonyLib;
@@ -16,11 +15,6 @@ namespace Ranensol.BepInEx.Aska.CraftBlueprints
     {
         internal static new ManualLogSource Log;
         internal static List<CraftBlueprintInfo> CustomBlueprints;
-
-        // Config entries
-        internal static ConfigEntry<bool> ConfigCreateExamples;
-        internal static ConfigEntry<bool> ConfigCreateCustom;
-        internal static ConfigEntry<bool> ConfigDumpReferences;
 
         private static string _pluginFolder;
 
@@ -46,33 +40,14 @@ namespace Ranensol.BepInEx.Aska.CraftBlueprints
 
         private void InitializeConfig()
         {
-            ConfigCreateExamples = Config.Bind(
-                Constants.CONFIG_SECTION_FILES,
-                Constants.CONFIG_KEY_CREATE_EXAMPLES,
-                true,
-                Constants.CONFIG_DESC_CREATE_EXAMPLES
-            );
+            PluginConfig.Initialize(Config);
 
-            ConfigCreateCustom = Config.Bind(
-                Constants.CONFIG_SECTION_FILES,
-                Constants.CONFIG_KEY_CREATE_CUSTOM,
-                true,
-                Constants.CONFIG_DESC_CREATE_CUSTOM
-            );
-
-            ConfigDumpReferences = Config.Bind(
-                Constants.CONFIG_SECTION_FILES,
-                Constants.CONFIG_KEY_DUMP_REFERENCES,
-                true,  // Default to true so users get references on first launch
-                Constants.CONFIG_DESC_DUMP_REFERENCES
-            );
-
-            Log.LogInfo($"[Plugin] Config loaded - CreateExamples: {ConfigCreateExamples.Value}, CreateCustom: {ConfigCreateCustom.Value}, DumpReferences: {ConfigDumpReferences.Value}");
+            Log.LogInfo($"[Plugin] Config loaded - CreateExamples: {PluginConfig.ConfigCreateExamples.Value}, CreateCustom: {PluginConfig.ConfigCreateCustom.Value}, DumpReferences: {PluginConfig.ConfigDumpReferences.Value}");
         }
 
         private static void DumpGameReferences()
         {
-            if (ConfigDumpReferences.Value)
+            if (PluginConfig.ConfigDumpReferences.Value)
             {
                 ReferenceDumper.DumpAllReferences(_pluginFolder);
             }

@@ -17,8 +17,7 @@ namespace Ranensol.BepInEx.Aska.CraftBlueprints.FileIO
             DumpMenuLists();
             DumpRules();
             DumpCategories();
-            DumpStations();
-            DumpStorageClasses();
+            DumpInteractions();
 
             Plugin.Log.LogInfo($"[ReferenceDumper] Reference dump complete!");
         }
@@ -26,49 +25,46 @@ namespace Ranensol.BepInEx.Aska.CraftBlueprints.FileIO
         private static void DumpItems()
         {
             var path = Path.Combine(_referenceFolder, "Items.txt");
-            var items = ResourceInfoHelper.AllItemInfos.Keys.OrderBy(k => k).ToList();
-            File.WriteAllLines(path, items);
-            Plugin.Log.LogInfo($"[ReferenceDumper] Dumped {items.Count} items");
+            var allItems = ResourceInfoHelper.AllItemInfos.Keys.OrderBy(k => k).ToList();
+            var filteredItems = ReferenceFilterUtility.FilterItems(allItems);
+            File.WriteAllLines(path, filteredItems);
+            Plugin.Log.LogInfo($"[ReferenceDumper] Dumped {filteredItems.Count} items (filtered from {allItems.Count})");
         }
 
         private static void DumpMenuLists()
         {
             var path = Path.Combine(_referenceFolder, "MenuLists.txt");
-            var lists = ResourceInfoHelper.AllItemInfoLists.Keys.OrderBy(k => k).ToList();
-            File.WriteAllLines(path, lists);
-            Plugin.Log.LogInfo($"[ReferenceDumper] Dumped {lists.Count} menu lists");
+            var allLists = ResourceInfoHelper.AllItemInfoLists.Keys.OrderBy(k => k).ToList();
+            var filteredLists = ReferenceFilterUtility.FilterMenuLists(allLists);
+            File.WriteAllLines(path, filteredLists);
+            Plugin.Log.LogInfo($"[ReferenceDumper] Dumped {filteredLists.Count} menu lists (filtered from {allLists.Count})");
         }
 
         private static void DumpRules()
         {
             var path = Path.Combine(_referenceFolder, "Rules.txt");
-            var rules = ResourceInfoHelper.AllBlueprintConditionRules.Keys.OrderBy(k => k).ToList();
-            File.WriteAllLines(path, rules);
-            Plugin.Log.LogInfo($"[ReferenceDumper] Dumped {rules.Count} rules");
+            var allRules = ResourceInfoHelper.AllBlueprintConditionRules.Keys.OrderBy(k => k).ToList();
+            var filteredRules = ReferenceFilterUtility.FilterRules(allRules);
+            File.WriteAllLines(path, filteredRules);
+            Plugin.Log.LogInfo($"[ReferenceDumper] Dumped {filteredRules.Count} rules (filtered from {allRules.Count})");
         }
 
         private static void DumpCategories()
         {
             var path = Path.Combine(_referenceFolder, "Categories.txt");
-            var categories = ResourceInfoHelper.AllItemCategoryInfos.Keys.OrderBy(k => k).ToList();
-            File.WriteAllLines(path, categories);
-            Plugin.Log.LogInfo($"[ReferenceDumper] Dumped {categories.Count} categories");
+            var allCategories = ResourceInfoHelper.AllItemCategoryInfos.Keys.OrderBy(k => k).ToList();
+            var filteredCategories = ReferenceFilterUtility.FilterCategories(allCategories);
+            File.WriteAllLines(path, filteredCategories);
+            Plugin.Log.LogInfo($"[ReferenceDumper] Dumped {filteredCategories.Count} categories (filtered from {allCategories.Count})");
         }
 
-        private static void DumpStations()
+        private static void DumpInteractions()
         {
-            var path = Path.Combine(_referenceFolder, "Stations.txt");
-            var stations = ResourceInfoHelper.AllCraftInteractions.Keys.OrderBy(k => k).ToList();
-            File.WriteAllLines(path, stations);
-            Plugin.Log.LogInfo($"[ReferenceDumper] Dumped {stations.Count} stations");
-        }
-
-        private static void DumpStorageClasses()
-        {
-            var path = Path.Combine(_referenceFolder, "StorageClasses.txt");
-            var classes = ResourceInfoHelper.AllItemStorageClasses.Keys.OrderBy(k => k).ToList();
-            File.WriteAllLines(path, classes);
-            Plugin.Log.LogInfo($"[ReferenceDumper] Dumped {classes.Count} storage classes");
+            var path = Path.Combine(_referenceFolder, "Interactions.txt");
+            var allInteractions = ResourceInfoHelper.AllCraftInteractions.Keys.OrderBy(k => k).ToList();
+            var filteredInteractions = ReferenceFilterUtility.FilterInteractions(allInteractions);
+            File.WriteAllLines(path, filteredInteractions);
+            Plugin.Log.LogInfo($"[ReferenceDumper] Dumped {filteredInteractions.Count} interactions (filtered from {allInteractions.Count})");
         }
     }
 }

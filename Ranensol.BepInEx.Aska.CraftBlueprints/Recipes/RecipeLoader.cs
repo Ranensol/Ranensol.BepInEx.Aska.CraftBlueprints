@@ -40,7 +40,7 @@ namespace Ranensol.BepInEx.Aska.CraftBlueprints.Recipes
             var recipesFolder = RecipeFileReader.GetRecipesFolderPath(pluginFolder);
 
             // Create Examples.json if config allows and file doesn't exist
-            if (Plugin.ConfigCreateExamples.Value)
+            if (PluginConfig.ConfigCreateExamples.Value)
             {
                 var examplesPath = Path.Combine(recipesFolder, Constants.EXAMPLES_FILE_NAME);
                 if (!File.Exists(examplesPath))
@@ -52,7 +52,7 @@ namespace Ranensol.BepInEx.Aska.CraftBlueprints.Recipes
             }
 
             // Create CustomRecipes.json if config allows and file doesn't exist
-            if (Plugin.ConfigCreateCustom.Value)
+            if (PluginConfig.ConfigCreateCustom.Value)
             {
                 var customPath = Path.Combine(recipesFolder, Constants.CUSTOM_RECIPES_FILE_NAME);
                 if (!File.Exists(customPath))

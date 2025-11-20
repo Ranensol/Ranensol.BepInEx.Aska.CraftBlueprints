@@ -13,10 +13,8 @@ A BepInEx mod for ASKA that allows you to create custom crafting recipes using s
 - 🌐 Works in single-player, multiplayer, and with villager task assignments
 - ✨ Create custom crafting recipes without coding
 - 🔧 Simple JSON configuration
-- 📋 Automatic reference file generation for relevant in-game items
-- 🎮 Works with most crafting stations (Workshop, Weaver, Player Inventory, etc.)
-- ⚠️ Does NOT currently work with "forging" crafting stations (Carpenter, Blacksmith) - there are multiple additional code layers simply beyond this mod (for now)
-- ⚠️ Does NOT currently provide Cooking station recipes - these are an entirely different beast, but may be covered in a future separate mod
+- 📋 Automatic reference file generation for relevant in-game items, now filtered
+- 🎮 Works with: Armorsmith, Workshop, Weaver, Leatherworker, Dyer, Player Inventory, and Raven Totem.
 - 🔄 Hot-reload support - just edit JSON and restart the game
 
 ## Installation
@@ -57,22 +55,22 @@ ASKA/
 
 ### For Players
 
-The mod comes with 5 example recipes to get you started. On first launch, you'll find these files in `BepInEx/plugins/Ranensol.BepInEx.Aska.CraftBlueprints/`:
+The mod comes with example recipes to get you started. On first launch, you'll find these files in `BepInEx/plugins/Ranensol.BepInEx.Aska.CraftBlueprints/`:
 
 **Recipes folder:**
 - `Examples.json` - Example recipes you can learn from
 - `CustomRecipes.json` - Empty file for your own recipes
 
 **Reference folder:**
-- `Items.txt` - All available items in the game
-- `MenuLists.txt` - All crafting station menus
-- `Stations.txt` - All crafting stations
-- `Categories.txt` - Blueprint categories
+- `Items.txt` - Game items likely to work for crafting
+- `MenuLists.txt` - Compatible crafting station menus
+- `Interactions.txt` - Compatible crafting station interactions
+- `Categories.txt` - Relevant blueprint categories
 - `Rules.txt` - Unlock conditions
 
 ### Configuration
 
-Config file: `BepInEx/config/com.ranensol.aska.craftblueprints.cfg`
+Config file: `BepInEx/config/Ranensol.BepInEx.Aska.CraftBlueprints.cfg`
 
 ```ini
 [Files]
@@ -80,8 +78,16 @@ CreateExampleFile = true      # Create Examples.json on launch
 CreateCustomRecipeFile = true # Create CustomRecipes.json on launch
 DumpReferenceFiles = true     # Create reference files on launch
 ```
-
 Set any option to `false` to disable file creation.
+
+```ini
+[Filters - Xxx]
+```
+These can be ignored unless you specifically want to see things that may not be compatible, or have added another mod whose items you want to include etc.
+Include is applied first, then Exclude.
+To see everything for a particular file (which was previously the default setting) simply ensure both IncludePrefixes and ExcludePrefixes have no value after the = sign.
+
+
 
 ## Creating Custom Recipes
 
@@ -124,7 +130,7 @@ Create or edit `CustomRecipes.json`:
 | `ingredients` | ✅ Yes | Items and quantities needed to craft this item, use values from `Items.txt` |
 | `quantity` | ✅ Yes | How many items this recipe produces |
 | `menuLists` | ✅ Yes | Which crafting menus show this recipe (from `MenuLists.txt`) |
-| `rules` | ❌ No | Unlock conditions, e.g. Workshop Tier 2 (from `Rules.txt`) |
+| `rules` | ❌ No | Unlock conditions, e.g. Workshop Tier 2 (from `Rules.txt`). Leave blank for it to always be unlocked/available |
 | `interaction` | ✅ Yes | Which crafting station this item can be created in (from `Stations.txt`) |
 | `category` | ✅ Yes | Blueprint category (from `Categories.txt`) |
 | `description` | ❌ No | Short description shown in-game |
@@ -138,16 +144,18 @@ Create or edit `CustomRecipes.json`:
 - Multiple JSON files are supported - create as many as you want in the Recipes folder
 - In multiplayer all clients and the server must have the same recipe json files
 
-### Common Crafting Stations
+### Crafting Stations & Interactions
 
 | Station | Interaction Name |
 |---------|-----------------|
-| Player Inventory | `VirtualCraftingStation` |
-| Workshop | `WorkstationInteraction` |
-| Weaver | `WeaverInteraction` |
+| Armorsmith | `VirtualCraftingStation` |
+| Dyer | `DyerInteraction` |
 | Leatherworker | `LeatherworkerTableInteraction` |
+| Player Inventory | `VirtualCraftingStation` |
+| Weaver | `WeaverInteraction` |
+| Workshop | `WorkstationInteraction` |
 
-Check `Stations.txt` for the complete list.
+Check `Interactions.txt` for the complete list.
 
 ## Troubleshooting
 
@@ -162,18 +170,16 @@ Check `Stations.txt` for the complete list.
 - Check that `DumpReferenceFiles = true` in the config
 - Launch the game at least once
 
+**Reference files not filtered:**
+- Delete the existing files in the "References" folder
+- Check that `DumpReferenceFiles = true` in the config
+- Launch the game again
+
 **Config file not appearing:**
 - Launch the game at least once with the mod installed
 - Check `BepInEx/config/` folder
 
 ## Example Recipes Included
-
-The mod ships with 5 example recipes:
-1. **Linen Cloth** - Craft linen at the Weaver
-2. **Linen Thread** - Craft thread at the Weaver
-3. **Leather Hide** - Stitch scraps at the Leatherworker
-4. **Simple Torch (Fish Oil)** - Alternative torch recipe at Workshop
-5. **Simple Bow** - Craft bows from inventory
 
 These are meant as learning examples - feel free to disable them in the config and delete the Examples.json.
 
